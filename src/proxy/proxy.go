@@ -1,22 +1,25 @@
 package proxy
 
-
-const (
-	Unknown = iota
-	Transparent
-	Anonymous
-	HighAnonymous
+import (
+	base "proxy/base"
+	_ "proxy/detail"
 )
 
-type Address struct {
-	IP string
-	Port int
-	Level int
-	Country string
+func GlobalManager() *base.Manager {
+	return base.GlobalProxyManger
 }
 
-type IPProxy interface {
-	Run() error
-	AddressList() []*Address
-	Register(m *Manager)
+func Start() []string {
+	m := GlobalManager()
+	return m.Start()
+}
+
+func GetProxy(name string) base.IPProxy {
+	m := GlobalManager()
+	return m.GetProxy(name)
+}
+
+func AddressList() []*base.Address {
+	m := GlobalManager()
+	return m.AddressList()
 }
