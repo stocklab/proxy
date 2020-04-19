@@ -20,14 +20,14 @@ func init() {
 }
 
 func newData() *data5u {
-	d := &data5u{urlList: []string {"http://www.data5u.com/"}}
+	d := &data5u{urlList: []string{"http://www.data5u.com/"}}
 	d.addressList = make([]*base.Address, 0, 2)
 	return d
 }
 
 func (p *data5u) makeAddress(url, port, level, country string) (*base.Address, error) {
 	addr := &base.Address{
-		IP:     url,
+		IP:      url,
 		Country: country,
 	}
 	var err error
@@ -69,9 +69,9 @@ func (p *data5u) run(url string) error {
 		return err
 	}
 	addressList := make([]*base.Address, 0)
-	doc.Find("ul[class=l2]").Each(func (i int, s *goquery.Selection) {
+	doc.Find("ul[class=l2]").Each(func(i int, s *goquery.Selection) {
 		data := make([]string, 0, 4)
-		s.Find("li").Each(func (j int, li *goquery.Selection) {
+		s.Find("li").Each(func(j int, li *goquery.Selection) {
 			if j < 4 {
 				data = append(data, li.Text())
 			}
